@@ -28,8 +28,12 @@
 
 * **A cryptographically strong random number minimally complies with the statistical random number generator tests specified in FIPS 140-2, Security Requirements for Cryptographic Modules, section 4.9.1. Additionally, SecureRandom must produce non-deterministic output. Therefore any seed material passed to a SecureRandom object must be unpredictable, and all SecureRandom output sequences must be cryptographically strong, as described in RFC 1750: Randomness Recommendations for Security.**
 
-* SecureRandom必须满足"产生不可预测"的(伪)随机数, 并且所有SecureRandom输出序列必须具有加密强度
+* SecureRandom必须满足"产生不可预测"的(伪)随机数(不可预测 不等于 完全随机), 并且所有SecureRandom输出序列必须具有加密强度
 
 * **Many SecureRandom implementations are in the form of a pseudo-random number generator (PRNG), which means they use a deterministic algorithm to produce a pseudo-random sequence from a true random seed. Other implementations may produce true random numbers, and yet others may use a combination of both techniques.**
 
-* SecureRandom的实现可以采用: 1.通过使用真随机数产生的种产生的伪随机数.   2.使用真正的随机数     3.两者兼用
+* SecureRandom的实现可以采用: 1.通过使用真随机数产生的种产生的伪随机数 2.使用真正的随机数 3.两者兼用
+
+* ** Depending on the implementation, the generateSeed and nextBytes methods may block as entropy is being gathered, for example, if they need to read from /dev/random on various Unix-like operating systems.**
+
+* generateSeed和nextBytes方法根据实现的不同有可能会阻塞. 例如它们需要从/dev/random中读取数据
